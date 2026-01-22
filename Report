@@ -1,0 +1,119 @@
+Research Question
+How have the import and export quantities and values of various food and agricultural items in United Kingdom of Great Britain and Northern Ireland evolved from 1961 to 2022, and what significant trends can be observed in their trade patterns?
+Data Acquisition: 
+The Food and Agriculture Organization of the United Nations (FAO) compiled the dataset utilized in this analysis. The data is available for download from the FAOSTAT database, specifically at the following link: https://www.fao.org/faostat/en/#data/TCL
+Compilation, processing, and dissemination by the Food and Agriculture Organization (FAO).
+Detailed information regarding the United Kingdom of Great Britain and Northern Ireland of agricultural prod-ucts is included in the Food and Agricultural Trade Dataset of the Food and Agriculture Organization (FAO). It encompasses annual trade data from 1961 to 2022, which pertains to approximately 600 distinct food and agricultural commodities. The dataset offers valuable insights into global trade patterns and is comprehen-sive, comparable, and current.
+
+Numerous agricultural product categories that were irrelevant to my research were encountered during the selection of this dataset from the FAO website. I eliminated these useless items and selected data that was specifically relevant to the United Kingdom of Great Britain and Northern Ireland in order simplify the dataset and concentrate on the most important information.
+• Export Quantity: The physical quantity of domestically produced or manufactured goods that are export-ed from the country. Live animals are expressed in units, while many commodities are expressed in tons.
+• Export Value: Expressed in thousand US dollars, reported as FOB (free on board) which includes the value of the goods plus the services performed to deliver the goods to the border of the exporting country.
+• Import Quantity: Physical quantity of products imported for domestic consumption or processing, includ-ing re-imports. Expressed in tonnes for most commodities and in units for live animals.
+• Import Value: Expressed in thousand US dollars, reported as CIF (Cost, Insurance, and Freight), includ-ing the value of the goods, the services to deliver goods to the border of the exporting country, and the ser-vices to deliver the goods to the importing country’s border.
+
+Preparation: 
+
+The columns which are deleted
+To simplify the dataset and concentrate on the research question, I eliminated numerous columns that were irrelevant and introduced unnecessary complexity. The following columns have been removed: Domain Code, Domain, Area Code (M49), Area, Element Code, Item Code (CPC), Year Code, Flag, Flag Description, and Note. The Domain column was eliminated since I had specifically chosen data that was associated with agricultural products, rendering it unnecessary to determine whether it was agricultural or not. The Area and Area Code columns were eliminated because all data is relevant to the region of Great Britain and Northern Ireland, and therefore, there is no requirement to specify the location. The Flag and Note columns were eliminated because they contain descriptions of the data collection process that are not pertinent to the research question. Furthermore, the dataset already includes other columns that contain the requisite information, so all code-related columns were eliminated.
+The columns which are retained:
+The dataset retains the following columns: Element, Item, Year, Unit, and Value. Due to its listing of agricultural and food imports and exports, the Element column is maintained. The Item column is retained because it contains a comprehensive list of all agricultural and food products. The Year column is essential because it encompasses data from 1961 to 2022. The Unit column is crucial because it specifies the units in which items are exported and imported, specifically in tons and (1000) USD. Lastly, the Value column is maintained due to its comprehensive listing of the values of all agricultural and food products that are imported and exported.
+	
+Before preparation the data is look like this:
+ 
+The dataset for which screenshot is also provided is unclean and unprepared, which renders it difficult to use and complex. The data's structure is the primary source of the issues, as columns such as Element, Unit, and Value are repeated for each entry, resulting in confusion and redundancy. The process of determining whether a row pertains to import quantity, import value, export quantity, or export value is complicated by the fact that the Element and Unit columns alternate values for each row. This disorganized format impedes comprehension and visualization, as it is challenging to determine which values correspond to which meas-urement type without the use of extensive filtering and manipulation. Moreover, latter I figure out that there are many decimal values.
+
+For data preparation I used python to clean, transpose and change format of data. 
+	
+Steps for Data preparation.
+	Pivoting the Data:
+	 
+	Using the code snippet provided below. Using the reset_index() function, I distinguished the values of "Import Quantity," "Import Value," "Export Quantity," and "Export Value."
+	Next, this code arranged these values in column format, thereby guaranteeing a dataset that was both structured and comprehensible.
+Flattening Multi Index Columns:
+ 
+Our columns contain multiple levels when we pivot the data, such as 'Export Quantity' and 't' for tonnes. To facilitate the manipulation of the columns, we consolidate these levels under a single name.
+
+Renaming Columns:
+ 
+The columns were renamed to more descriptive names, matching the desired output format.
+
+
+
+Converting Decimal Values to Integers:
+ 
+After being rounded to the nearest integer, the numerical values were converted to integer format. This pro-cedure guarantees that the dataset contains whole numbers, which are frequently simpler to interpret and employ in analyses.
+	After preparation the data is look like this:
+ 
+The dataset that has been displayed is now well-formatted and clean, which resolves the issues that were identified in the previous unstructured data. At the outset, the data was challenging to accurately identify and analyse due to the interspersion of the Element and Unit columns with each row. This disorganization and redundancy resulted in difficulties in distinguishing between the values of import quantity, import value, ex-port quantity, and export value.
+These issues have been satisfactorily resolved in the cleaned dataset. The Element and Unit values have been converted into separate, dedicated columns, which are referred to as Export Quantity (t), Export Value (1000 USD), Import Quantity (t), and Import Value (1000 USD). This distinct division guarantees that each measurement is readily identifiable and accessible.
+
+Each row now corresponds to a specific Item and Year, with the relevant export and import values neatly aligned in their respective columns, because of the data being organized in this structured format. Readabil-ity is substantially improved by this layout, which also simplifies data analysis and visualization. It simplifies the process of tracking and comparing the trade metrics for each commodity over time by eliminating redun-dancy.
+
+This is the google colab link where all data preparation task done.
+	https://colab.research.google.com/drive/1xOQCRzGB4DZBJn_O3xlQWIonlutdJGBx?usp=sharing
+Data Analysis (narrative): 
+	The analysis of the UK's food and agricultural trade data from 1961 to 2022 revealed several significant trends. There has been a marked increase in the import of various commodities, driven by changes in consumer preferences and insufficient domestic production. The reliance on imports underscores the need for strategic planning to ensure food security. Future research could focus on the impact of trade policies and global market conditions on these trends.
+Overall Trade Trends
+	In this section, I illustrate the general trend of the total of the quantities and values of export and import for 79 agricultural products. I employ a line chart to successfully demonstrate these trends, as it is the most effective tool for visualizing changes over time in time series data. The line chart is instrumental in presenting a comprehensive understanding of the agricultural trade activities for the selected products by clearly illustrating the variations and patterns of both import and export data over the years.
+Describing about both sum of Import value (1000 USD) and sum of Import Quantity of 79 Agriculture products.
+	Describing about the sum of import value (1000 USD) of 79 Agriculture products.
+	 
+The line chart illustrates the import values of agricultural items in the United Kingdom from 1961 to 2022, expressed in thousands of USD. The 1960s to the late 1980s were characterized by consistent growth, which was followed by fluctuations in the late 1980s and early 1990s. A significant increase has been ob-served since the early 2000s, with a sharp increase in recent years. This increase is indicative of the in-creasing dependence on imported agricultural goods because of evolving consumption patterns and global market conditions.
+Describing about the sum of Import Quantity of 79 Agriculture products.
+	 
+The line chart illustrates the import quantities of agricultural items in the United Kingdom (in tons) from 1961 to 2022. In the 1960s and 1970s, there were substantial fluctuations, followed by a decrease in the begin-ning of the 1980s, and a subsequent period of recovery and growth from the 1990s onward. The overall trend indicates an increase in import quantities, which is indicative of the increasing demand and depend-ence on imported agricultural products, in spite current fluctuation.
+
+Describing about both sum of Import value (1000 USD) and sum of Import Quantity of 79 Agriculture products.
+ 
+Between 1961 and 2022, the United Kingdom's import values (in USD) and quantities (in tons) of agricultural items have both increased. However, import values have grown at a faster pace since the late 1990s. This is illustrated in the combined line chart shown below. This suggests that costs are increasing or that imports are of higher value. Import values have consistently exceeded quantities in recent years, indicating substan-tial volatility.
+Describing about both sum of Export value (1000 USD) and sum of Export Quantity of 79 Agriculture products.
+Describing about the sum of Export value (1000 USD) of 79 Agriculture products.
+	 
+The export values (in thousands of USD) of 79 agricultural items from the United Kingdom between 1961 and 2022 are depicted in the line chart. There was a substantial increase in export values from the mid-1970s, with significant fluctuations in the early 2000s and consistent growth thereafter. The overall trend suggests a substantial increase in the value of agricultural exports over the period, despite some volatility.
+Describing about the sum of Import Quantity of 79 Agriculture products.
+
+ 
+From the late 1970s onward, export quantities experienced a substantial increase, characterized by significant volatility and numerous peaks and troughs, particularly in the 1990s. The overall trend suggests that export quantities have experienced substantial growth during the period, despite fluctuations.
+Describing about both sum of Export value (1000 USD) and sum of Export Quantity of 79 Agriculture products.
+	 
+The total line chart displays the export values (in USD) and quantities (in tons) of 79 agricultural items from the United Kingdom between 1961 and 2022. The late 1970s saw a substantial increase in both metrics, with export values generally increasing at a faster pace than quantities. The overall trend suggests that both ex-port values and quantities have experienced substantial growth, despite the significant volatility that has oc-curred in recent years.
+
+
+	
+	
+Through whole period the proportion of sum of Import, Export of items Quantity and value.
+
+Pie charts in Power BI are particularly beneficial for illustrating the highest percentage of an item's quantity or value that is exported or imported. They offer a visual representation of the distribution that is both clear and immediate, which facilitates the identification of the items with the highest shares. This is beneficial for emphasizing the most significant contributors in your dataset and comprehending their relative significance.
+
+The proportion of sum of Export Quantity and Value of items throughout the whole tenure.
+   
+
+From 1961 to 2022, wheat accounted for 59.11% (103.79 million tons) of the total exports from the UK, making it the most frequently exported agricultural item. This is illustrated in the first pie chart. In contrast, the second pie chart indicates that cigarettes are the most exported product, contributing 20.77% ($31 million) of the total export value, despite not being the most exported by volume. Other high-value items include wine, meat of cattle, and chocolate products. Wheat, despite its substantial export volume, only accounts for 12.4% of the total export value. This discrepancy suggests that, even though wheat is essential to the UK's agricultural export sector due to its favourable production conditions, high-revenue exports are derived from value-added or high-priced items, such as cigarettes, which have higher unit values.
+The proportion of sum of Import Quantity and Value of items throughout the whole tenure.
+ 
+The initial pie chart illustrates that wheat was the most frequently imported agricultural item in the United Kingdom from 1961 to 2022, comprising 26.88% (134.8 million tons) of the total imports. Wine (8.97%), bananas (7.56%), and maize (corn) (7.32%) are additional substantial imports in terms of quantity. Conversely, the second pie chart indicates that wine is the most valuable import, accounting for 34.83% ($130 million) of the total import value. Chocolate products (11.91%) and chicken meat (9.98%) follow in that order. Despite wheat's dominance in import quantity, it only accounts for 6.16% of the total import value, underscoring that high-volume imports such as wheat are not the most revenue-generating materials. This discrepancy suggests that the import value is significantly influenced by factors such as market demand and unit price, with high-value items such as wine and chocolate products contributing significantly to import expenses. 
+
+Import Quantity Trends and Value Trends of Top 5 Agricultural Items (1961-2022)
+	 
+Export Quantity Trends and Value Trends of Top 5 Agricultural Items (1961-2022)
+	 
+The charts he provided illustrate the import quantities and values of the top five agricultural items in the UK from 1961 to 2022, indicating substantial trends. Since the late 1970s, wheat has experienced a substantial decline in quantity, stabilizing at lower levels, while its value remains less prominent. Initially, wheat was a dominant import. Contrary to this, wine has experienced a substantial increase in both import quantity and value, particularly since the 1990s, which is indicative of its high market value and high demand. Even though import quantities have remained consistent, chocolate products have experienced a substantial in-crease in import value since 2000, underscoring their high unit value. Maize and bananas exhibit volatility in their import quantities, with substantial peaks, and their values also increase, suggesting that demand and supply conditions are subject to fluctuations. The demand for meat products, particularly those derived from cattle and chickens, has been consistently increasing, as evidenced by the consistent increase in their im-port values. Overall, the charts suggest that the UK's agricultural imports are shifting toward high-value items such as wine, chocolate, and meat, which is indicative of evolving consumer preferences and market dynamics. Conversely, the volume of imported wheat has decreased.
+Top 5 Years of Annual Import and Export Values and Quantities
+
+ 
+
+In the provided charts, the highest import value is observed in 2022, reaching $25 million, reflecting a signifi-cant demand for imported goods in recent years. The highest import quantity was recorded in 2020, with 15.08 million tons, indicating a peak in the volume of imports. For exports, the highest value was seen in 2011 at $7 million, showcasing a peak in the market value of exported goods. The year 1998 recorded the highest export quantity with 6.56 million tons, highlighting a strong export volume during that period. Overall, these years mark significant points in the UK's trade history, illustrating notable trends in the import and ex-port of agricultural items.
+
+
+Visualisations: 
+Line Charts: 
+I present the overall trend of the total quantities and values of export and import for 79 agricultural products. I utilize a line chart to effectively illustrate these trends, as it is the most effective tool for visualizing changes over time in time series data. The line chart is essential in providing a comprehensive understanding of agricultural trade activities for the selected products by clearly illustrating the variations and patterns of both import and export data over the years (Best Charts to Show Trend Over Time, no date).
+
+
+Pie Charts:
+
+The most significant percentage of an item's quantity or value that is exported or imported is effectively illustrated by pie charts in Power BI, providing a clear and immediate visual representation of the distribution. The charts facilitate the identification of items with the highest shares by emphasizing the most significant contributors in the dataset. The pie charts for exports indicate a discrepancy between the most exported items by quantity and those by value, which implies that high-revenue exports are derived from high-priced or value-added items. In the same vein, the charts demonstrate that high-volume imports are not necessarily the most revenue-generating, as high-value items significantly influence import expenses. This visual tool facilitates a comprehensive analysis of trade patterns by enabling the comprehension of the relative significance of various items in terms of both quantity and value.
+Pie charts are an effective method for illustrating the proportion of the sum of import and export quantities and values over time. They clearly emphasize the most significant contributors in the dataset, which facilitates comprehension of their relative significance. Pie charts are a highly effective method for presenting the key elements in your data, emphasizing the most significant aspects and ensuring that the most pertinent insights are communicated clearly (Atlassian, 2024c).
+
+Line charts were selected to illustrate the import and export quantities and values of the top five agricultural items in the UK from 1961 to 2022 due to their ability to accurately represent trends over time. They offer a visual representation that is both clear and consistent, which facilitates the observation of long-term patterns and fluctuations. Line charts enable the simultaneous comparison of numerous items, emphasizing substantial changes such as the increase in wine imports and the decrease in wheat imports. This format is optimal for time-series data, as it facilitates the identification of anomalies, trends, and cyclical patterns. In general, line charts provide a comprehensive and detailed perspective on trade activities during the period under investigation (Trade of agricultural commodities, 2005).
+Bar charts were selected to illustrate the top five years of annual import and export values and quantities due to their ability to facilitate a clear and uncomplicated visual comparison of discrete data points. This type of chart enables the identification of the years with the highest import and export figures, thereby simplifying the process of identifying significant trends and peaks. The bar charts underscore the extent of the dispari-ties between years, which facilitates the rapid comprehension of the periods of the most intense trade activi-ty. Furthermore, bar charts are effective in demonstrating the quantity and value dimensions of the data in a side-by-side manner, thereby enabling a thorough examination of the agricultural trade trends in the United Kingdom over time (Chandoo, 2019).
